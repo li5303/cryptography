@@ -1,1 +1,0 @@
-The secret message is: Never use stream cipher key more than once.
