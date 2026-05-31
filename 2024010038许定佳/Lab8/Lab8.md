@@ -14,8 +14,11 @@
 
 请说明攻击者可以如何修改密文，使其解密后变为 `"Pay Bob 500$"`。修改后的密文是什么（十六进制编码）？这说明 CBC 加密本身不提供完整性保护。
 
-修改后的密文：20814804c1767293bd9f1d9cab3bc3e7ac1e37bfb15599e5f40eef805488281d
+修改后的密文：
 
+```text
+20814804C1767293BD9F1D9cab3BC3E7AC1E37Bfb15599E5F40eEF805488281d
+```
 
 ---
 
@@ -45,7 +48,7 @@
   D'(k, c) = D(k, c \oplus 1^s)
   $$
 
-- [x] $E'(k, m) = (E(k, m), E(k, m))$，且
+- [ ] $E'(k, m) = (E(k, m), E(k, m))$，且
 
   $$
   D'(k, (c_1, c_2)) =
@@ -86,8 +89,8 @@ $$
 
 为了使该 MAC 系统安全，加密系统 $(E, D)$ 需要满足什么性质？
 
-- [ ] 认证加密
-- [x] 确定性选择明文攻击下的语义安全
+- [x] 认证加密
+- [ ] 确定性选择明文攻击下的语义安全
 - [ ] 完美保密性
 - [ ] 语义安全
 
@@ -172,7 +175,7 @@ $$
   E'((k_1,k_2),t',1) \oplus E'((k_1,k_2),t',0)
   $$
 
-- [ ] 不安全，因为对于 $x \neq x'$ 且 $t \neq t'$，有
+- [x] 不安全，因为对于 $x \neq x'$ 且 $t \neq t'$，有
 
   $$
   E'((k_1,k_2),t,x) \oplus E'((k_1,k_2),t',x)
@@ -188,7 +191,7 @@ $$
   E'((k_1,k_2),0,x') \oplus E'((k_1,k_2),1,x')
   $$
 
-- [x] 不安全，因为对于 $x \neq x'$，有
+- [ ] 不安全，因为对于 $x \neq x'$，有
 
   $$
   E'((k_1,k_2),0,x) \oplus E'((k_1,k_2),0,x)
@@ -232,8 +235,8 @@ $$
 也就是说，消息 $m$ 被用作 tweak，而传给 $E$ 的明文始终设为 $0$。这个 MAC 安全吗？
 
 - [ ] 这取决于具体的可调分组密码
-- [ ] `安全`
-- [x] 不安全
+- [x] `安全`
+- [ ] 不安全
 
 ---
 
@@ -264,8 +267,8 @@ $$
 
 - [ ] 是的，它是安全的
 - [ ] 不安全：$E(k, (t,1), P(t,2)) \oplus E(k, (t,2), P(t,1)) = P(t,1)$
-- [ ] 不安全：$E(k, (t,1), P(t,1)) \oplus E(k, (t,2), P(t,2)) = P(t,1) \oplus P(t,2)$
-- [x] 不安全：$E(k, (t,1), P(t,1)) \oplus E(k, (t,2), P(t,2)) = 0$
+- [x] 不安全：$E(k, (t,1), P(t,1)) \oplus E(k, (t,2), P(t,2)) = P(t,1) \oplus P(t,2)$
+- [ ] 不安全：$E(k, (t,1), P(t,1)) \oplus E(k, (t,2), P(t,2)) = 0$
 
 ---
 
@@ -311,9 +314,9 @@ SSH 协议面临一个安全攻击，该攻击利用了以下两个问题：
 
 你会如何重新设计 SSH 以抵抗这种攻击？
 
-- [ ] 发送未加密但经过 MAC 认证的长度字段（Send the length field unencrypted (but MAC-ed)）
+- [x] 发送未加密但经过 MAC 认证的长度字段（Send the length field unencrypted (but MAC-ed)）
 - [x] 用 encrypt-then-MAC 替换 encrypt-and-MAC（Replace encrypt-and-MAC by encrypt-then-MAC）
-- [ ] 在长度字段后立即添加对 (seq-num, length) 的 MAC（Add a MAC of (seq-num, length) right after the len field）
+- [x] 在长度字段后立即添加对 (seq-num, length) 的 MAC（Add a MAC of (seq-num, length) right after the len field）
 - [ ] 移除长度字段，通过每次接收一个字节后验证 MAC 来识别数据包边界（Remove the length field and identify packet boundary by verifying the MAC after every received byte）
 
 ---
@@ -344,3 +347,4 @@ $$
 - [ ] $IV' = IV \oplus (\ldots 80 \ldots)$
 - [x] $IV' = IV \oplus (\ldots 80 \ldots) \oplus (\ldots 25 \ldots)$
 - [ ] 无法实现（It can't be done）
+
